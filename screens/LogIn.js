@@ -1,25 +1,47 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRef } from 'react/cjs/react.development';
 import AuthButton from '../components/auth/AuthButton';
 import AuthLayout from '../components/auth/AuthLayout';
 import { TextInput } from '../components/auth/AuthShared';
 
 const LogIn = ({ navigation }) => {
-  return (<AuthLayout>
-    <TextInput
-      placeholder="Username"
-      placeholderTextColor={"rgba(255,255,255,0.6)"}
-      returnKeyType="next"
-    />
-    <TextInput
-      placeholder="Password"
-      placeholderTextColor={"rgba(255,255,255,0.6)"}
-      secureTextEntry
-      returnKeyType="done"
-      lastOne={true}
-    />
-    <AuthButton disabled={true} text="Log in" />
-  </AuthLayout>);
+  const { register, handleSubmit, setValue } = useForm()
+  const passwordRef = useRef()
+  const onNext = (nextOne) => {
+    nextOne?.current?.focus()
+  }
+  const onValid = (data) => {
+    console.log(data);
+  }
+  useEffect(() => {
+    register("username")
+    register("password")
+  }, [register])
+
+  return (
+    <AuthLayout>
+      <TextInput
+        placeholder="Username"
+        placeholderTextColor={"rgba(255,255,255,0.6)"}
+        returnKeyType="next"
+        onChangeText={(text) => setValue("username", text)}
+        autoCapitalize="none"
+        onSubmitEditing={() => onNext(passwordRef)}
+      />
+      <TextInput
+        ref={passwordRef}
+        placeholder="Password"
+        placeholderTextColor={"rgba(255,255,255,0.6)"}
+        secureTextEntry
+        returnKeyType="done"
+        lastOne={true}
+        onChangeText={(text) => setValue("password", text)}
+        onSubmitEditing={handleSubmit(onValid)}
+      />
+      <AuthButton disabled={false} text="Log in" onPress={handleSubmit(onValid)} />
+    </AuthLayout>);
 }
 
 export default LogIn;

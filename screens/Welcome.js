@@ -22,6 +22,7 @@ const CreateAccountText = styled.Text`
 const LoginLink = styled.Text`
   color: ${colors.blue};
   font-weight: 600;
+  text-align: center;
   margin-top: 20px;
 `
 
