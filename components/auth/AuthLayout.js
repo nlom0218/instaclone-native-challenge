@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
@@ -22,12 +22,18 @@ const AuthLayout = ({ children }) => {
     Keyboard.dismiss()
   }
   return (
-    <TouchableWithoutFeedback style={{ flex: 1 }}
-      onPress={dismissKeyboard}
-    >
+    <TouchableWithoutFeedback style={{ flex: 1 }} onPress={dismissKeyboard}>
       <Container>
-        <Logo resizeMode="contain" source={require("../../assets/Instagram-Logo.png")} />
-        {children}
+        <KeyboardAvoidingView
+          style={{
+            width: "100%",
+          }}
+          behavior="position"
+          keyboardVerticalOffset={Platform.OS === "ios" ? "20" : "-50"}
+        >
+          <Logo resizeMode="contain" source={require("../../assets/Instagram-Logo.png")} />
+          {children}
+        </KeyboardAvoidingView>
       </Container>
     </TouchableWithoutFeedback>
   );
