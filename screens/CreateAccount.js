@@ -23,11 +23,21 @@ const CreateAccount = () => {
     console.log(data);
   }
   useEffect(() => {
-    register("firstName")
-    register("lastName")
-    register("username")
-    register("email")
-    register("password")
+    register("firstName", {
+      required: true
+    })
+    register("lastName", {
+      required: true
+    })
+    register("username", {
+      required: true
+    })
+    register("email", {
+      required: true
+    })
+    register("password", {
+      required: true
+    })
   }, [register])
   return (<AuthLayout>
     <TextInput
@@ -73,7 +83,7 @@ const CreateAccount = () => {
       onSubmitEditing={handleSubmit(onValid)}
       onChangeText={(text) => setValue("password", text)}
     />
-    <AuthButton text="Create Account" disabled={true} onPress={handleSubmit(onValid)} />
+    <AuthButton text="Create Account" disabled={false} onPress={handleSubmit(onValid)} />
   </AuthLayout>);
 }
 

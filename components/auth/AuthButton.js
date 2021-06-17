@@ -1,4 +1,5 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../../colors';
 
@@ -16,9 +17,9 @@ const ButtonText = styled.Text`
   text-align: center;
 `
 
-const AuthButton = ({ onPress, disabled, text }) => {
+const AuthButton = ({ onPress, disabled, text, loading }) => {
   return (<Button disabled={disabled} onPress={onPress}>
-    <ButtonText>{text}</ButtonText>
+    {loading ? <ActivityIndicator color="white" /> : <ButtonText>{text}</ButtonText>}
   </Button>);
 }
 

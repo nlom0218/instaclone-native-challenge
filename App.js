@@ -7,6 +7,8 @@ import styled from 'styled-components/native';
 import LoggedOutNav from './navigators/LoggedOutNav';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppearanceProvider, Appearance } from 'react-native-appearance';
+import { ApolloProvider } from '@apollo/client';
+import client from './apollo';
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -27,11 +29,13 @@ export default function App() {
   }
 
   return (
-    <AppearanceProvider>
-      <NavigationContainer>
-        <LoggedOutNav></LoggedOutNav>
-      </NavigationContainer>
-    </AppearanceProvider>
+    <ApolloProvider client={client}>
+      <AppearanceProvider>
+        <NavigationContainer>
+          <LoggedOutNav></LoggedOutNav>
+        </NavigationContainer>
+      </AppearanceProvider>
+    </ApolloProvider>
   );
 }
 

@@ -16,8 +16,12 @@ const LogIn = ({ navigation }) => {
     console.log(data);
   }
   useEffect(() => {
-    register("username")
-    register("password")
+    register("username", {
+      required: true
+    })
+    register("password", {
+      required: true
+    })
   }, [register])
 
   return (
@@ -40,7 +44,7 @@ const LogIn = ({ navigation }) => {
         onChangeText={(text) => setValue("password", text)}
         onSubmitEditing={handleSubmit(onValid)}
       />
-      <AuthButton disabled={false} text="Log in" onPress={handleSubmit(onValid)} />
+      <AuthButton loading={true} text="Log in" onPress={handleSubmit(onValid)} />
     </AuthLayout>);
 }
 
