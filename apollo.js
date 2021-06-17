@@ -1,7 +1,9 @@
-const { ApolloClient, InMemoryCache } = require("@apollo/client");
+const { ApolloClient, InMemoryCache, makeVar } = require("@apollo/client");
+
+export const isLoggedInVar = makeVar(false)
 
 const client = new ApolloClient({
-  uri: "https://tall-moth-43.loca.lt/graphql",
+  uri: "https://bitter-skunk-57.loca.lt/graphql",
   cache: new InMemoryCache()
 })
 
