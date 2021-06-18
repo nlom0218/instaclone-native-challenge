@@ -10,7 +10,7 @@ const Container = styled.View`
   padding: 0px 40px;
 `
 
-const Logo = styled.Image`
+const Logo = styled.r`
   max-width: 50%;
   width: 100%;
   height: 100px;
